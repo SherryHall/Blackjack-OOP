@@ -8,7 +8,29 @@ namespace Blackjack_OOP
 {
 	class Program
 	{
-
+		static string DetermineWinner(int patronSum, int dealerSum)
+		{
+			if (patronSum > 21)
+			{
+				return "\nYou busted.  You lose!\n";
+			}
+			else if (dealerSum > 21)
+			{
+				return "\nDealer busted.  You win!\n";
+			}
+			else if (patronSum > dealerSum)
+			{
+				return "\nYour hand is higher. You Win!\n";
+			}
+			else if (patronSum < dealerSum)
+			{
+				return "\nDealer hand is higher. You Lose!\n";
+			}
+			else
+			{
+				return "\nYou tied so this is a push. No one wins.\n";
+			}
+		}
 
 
 		static void Main(string[] args)
@@ -47,27 +69,7 @@ namespace Blackjack_OOP
 							dealer.DealerPlays(currShoe);
 						}
 						// *** DETERMINE WHO WON ***
-						if (patron.cardSum > 21)
-						{
-							Console.WriteLine("\nYou busted.  You lose!\n");
-						}
-						else if (dealer.cardSum > 21)
-						{
-							Console.WriteLine("\nDealer busted.  You win!\n");
-						}
-						else if (patron.cardSum > dealer.cardSum)
-						{
-							Console.WriteLine("\nYour hand is higher. You Win!\n");
-						}
-						else if (patron.cardSum < dealer.cardSum)
-						{
-							Console.WriteLine("\nDealer hand is higher. You Lose!\n");
-						}
-						else
-						{
-							Console.WriteLine("\nYou tied so this is a push. No one wins.\n");
-						}
-
+						Console.WriteLine(DetermineWinner(patron.cardSum, dealer.cardSum));
 					}
 				}
 				Console.ReadLine();
