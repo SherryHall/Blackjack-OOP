@@ -36,7 +36,7 @@ namespace Blackjack_OOP
 	{
 		public Suit Suit { get; set; }
 		public Rank Rank { get; set; }
-		public int cardIndex = 0;
+
 
 		public Card(Suit s, Rank r)
 		{
@@ -117,3 +117,5 @@ namespace Blackjack_OOP
 			}
 			return sum;
 		}
+	}
+}
