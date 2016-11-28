@@ -33,5 +33,49 @@ namespace Blackjack_OOP
 
 
 		}
+		public void DealerPlays(Shoe currShoe)
+		{
+			// *** DEALERS TURN ***
+			Console.WriteLine($"\nDealers current total is {this.cardSum}.  ");
+			while ((this.cardSum < 16))
+			//while ((dealerSum < 16) || (dealerSum < playerSum))      alternate logic
+			{
+				Console.WriteLine("Dealer Hits");
+				this.ReceiveCard(currShoe.DealACard(), "Dealer", false);
+			}
+		}
+		public void PatronPlays(Shoe currShoe, int showingSum)
+		{
+			var hitMe = "Y";
+			var validAnswer = false;
+
+			Console.WriteLine($"\nYour current total is {this.cardSum} and the dealer is showing {showingSum}");
+			//Player asks for card (hits) until stops or goes over 21
+			while (this.cardSum <= 21 && hitMe == "Y")
+			{
+				do
+				// Ask player if he wants to hit until you get a valid answer
+				{
+					Console.Write("Do you want to hit?  (Y/N)  ");
+					hitMe = Console.ReadLine().ToUpper();
+					switch (hitMe[0])
+					{
+						case 'Y':
+							validAnswer = true;
+							this.ReceiveCard(currShoe.DealACard(), "Patron", false);
+							break;
+
+						case 'N':
+							validAnswer = true;
+							break;
+						default:
+							Console.WriteLine("Invalid answer. Try again.");
+							validAnswer = false;
+							break;
+					}
+				}
+				while (!validAnswer);
+			}
+		}
 	}
 }
