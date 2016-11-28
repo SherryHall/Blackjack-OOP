@@ -10,7 +10,6 @@ namespace Blackjack_OOP
 	{
 		public int cardSum = 0;
 		public int showingSum = 0;
-		//int cardCount = 0;
 		List<Card> Hand = new List<Card>();
 
 		public Player()

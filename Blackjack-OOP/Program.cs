@@ -41,6 +41,18 @@ namespace Blackjack_OOP
 				while (!validAnswer);
 			}
 		}
+
+		static void DealerPlays(Player dealer, Shoe currShoe)
+		{
+			// *** DEALERS TURN ***
+			Console.WriteLine($"\nDealers current total is {dealer.cardSum}.  ");
+			while ((dealer.cardSum < 16))
+			//while ((dealerSum < 16) || (dealerSum < playerSum))      alternate logic
+			{
+				Console.WriteLine("Dealer Hits");
+				dealer.ReceiveCard(currShoe.DealACard(), "Dealer", false);
+			}
+		}
 		static void Main(string[] args)
 		{
 			var wantToPlay = true;
@@ -69,13 +81,40 @@ namespace Blackjack_OOP
 					}
 					else
 					{
-						// *** Patrons TURN ***
+						// *** PATRONS TURN ***
 						PatronPlays(patron, currShoe, dealer.showingSum);
-						Console.ReadLine();
+						if (patron.cardSum <= 21)
+						{
+							// *** DEALERS TURN
+							DealerPlays(dealer, currShoe);
+						}
+						// *** DETERMINE WHO WON ***
+						if (patron.cardSum > 21)
+						{
+							Console.WriteLine("\nYou busted.  You lose!\n");
+						}
+						else if (dealer.cardSum > 21)
+						{
+							Console.WriteLine("\nDealer busted.  You win!\n");
+						}
+						else if (patron.cardSum > dealer.cardSum)
+						{
+							Console.WriteLine("\nYour hand is higher. You Win!\n");
+						}
+						else if (patron.cardSum < dealer.cardSum)
+						{
+							Console.WriteLine("\nDealer hand is higher. You Lose!\n");
+						}
+						else
+						{
+							Console.WriteLine("\nYou tied so this is a push. No one wins.\n");
+						}
+
 					}
 				}
+				Console.ReadLine();
 			}
-			
+
 		}
 	}
 }
